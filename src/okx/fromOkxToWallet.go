@@ -1,4 +1,4 @@
-package okxToWallet
+package walletAndOkx
 
 import (
 	"bytes"
@@ -18,7 +18,7 @@ type OKXAuth struct {
 }
 
 // Структура транзакции
-type Transaction struct {
+type OKXTransaction struct {
 	Amount    string
 	ToAddress string
 	Network   string
@@ -43,7 +43,7 @@ var okxAuth = OKXAuth{
 var rpcURL = "https://toncenter.com/api/v2/jsonRPC" // Пример URL для TON RPC
 
 // Функция для выполнения запроса на вывод средств с OKX
-func WithdrawFromOKX(transaction Transaction) error {
+func WithdrawFromOKX(transaction OKXTransaction) error {
 	url := "https://www.okx.com/api/v5/asset/withdrawal"
 	reqBody := WithdrawRequest{
 		Currency:  "TON", // Указываем валюту TON
@@ -153,7 +153,7 @@ func CheckTONBalance(address string) (float64, error) {
 }
 
 // Функция для выполнения транзакции
-func ExecuteTransaction(transaction Transaction) error {
+func ExecuteTransaction(transaction OKXTransaction) error {
 	fmt.Println("Начало транзакции с OKX на TON кошелек...")
 
 	// Шаг 1: Вывод средств с OKX
